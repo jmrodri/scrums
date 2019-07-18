@@ -4,17 +4,17 @@
 
 Locate good builds here:  https://openshift-release.svc.ci.openshift.org/
 
-Use the "Download the installer" link to get the correct installer binary to
+Use the *Download the installer* link to get the correct installer binary to
 install the latest code.
 
 Click the linux installer, should be something like
-openshift-installer-linux-4.1...tar.gz. Extract to a desired directory.
+`openshift-installer-linux-4.1...tar.gz`. Extract to a desired directory.
 
 
 Use builds from:
 
-4.1.x-x.ci: You want to test code that hasn't been built by OCP yet
-4.1.x-x.nightly: You want to test code that customers will get if we shipped today.
+*4.1.x-x.ci*: You want to test code that hasn't been built by OCP yet  
+*4.1.x-x.nightly*: You want to test code that customers will get if we shipped today.
 
 ## Get the auth secret
 
