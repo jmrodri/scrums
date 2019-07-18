@@ -67,20 +67,34 @@ some more discussion is here:
 
 ## Install the cluster
 
-I usually extract the install program to ~/deploy/MM-DD or something like that.
+I usually extract the install program to `~/deploy/MM-DD` or something like that.
+
+
+1) Run the installer, debug log level is helpful to figure out issues that may
+crop up.
+2) When prompted pick `/home/devel/jesusr/.ssh/libra.pub`
 
 ```
-jaboyd@jboyd 0515]$ ./openshift-install create cluster  --log-level debug
+[jesusr@transam 0718]$ ./openshift-install create cluster  --log-level debug
 
 ? SSH Public Key  [Use arrows to move, type to filter, ? for more help]
-  /home/jaboyd/.ssh/id_rsa.pub
-  /home/jaboyd/.ssh/jaboyd@redhat.com-id_rsa.pub
-  /home/jaboyd/.ssh/libra.pub
-# pick /home/jaboyd/.ssh/libra.pub
+  /home/devel/jesusr/.ssh/id_rsa.fedora.pub
+  /home/devel/jesusr/.ssh/id_rsa.jmrodri.pub
+  /home/devel/jesusr/.ssh/id_rsa.pub
+> /home/devel/jesusr/.ssh/libra.pub
+  <none>
+```
 
+3) Pick the AWS Platform.
+
+```
 ? Platform  [Use arrows to move, type to filter]
-# pick AWS
+> aws
+```
 
+4) Use one of the east regions, I usually use **us-east-1 (N. Virginia)**
+
+```
 ? Platform aws
 ? Region  [Use arrows to move, type to filter, ? for more help]
   eu-west-2 (London)
@@ -88,53 +102,51 @@ jaboyd@jboyd 0515]$ ./openshift-install create cluster  --log-level debug
   sa-east-1 (São Paulo)
 > us-east-1 (N. Virginia)
   us-east-2 (Ohio)
-  us-west-1 (N. California) us-west-2 (Oregon)
+  us-west-1 (N. California)
+  us-west-2 (Oregon)
+```
+
+5) Use `devcluster.openshift.com`
+
+```
 ? Region us-east-1
-
-us-east-1 or use-east-2 work
-
-
 DEBUG       Generating "Base Domain"...
 DEBUG listing AWS hosted zones
 ? Base Domain  [Use arrows to move, type to filter, ? for more help]
 > devcluster.openshift.com
-  eap-qe-ocp41-cluster10.fw.rhcloud.com
-  eap-qe-ocp41-cluster12.fw.rhcloud.com
-  eap-qe-ocp41-cluster7.fw.rhcloud.com
-  installer.devcluster.openshift.com
-  kwills-cluster.fw.rhcloud.com
-  kwills1-cluster.fw.rhcloud.com
+  eap-qe-cluster59.fw.rhcloud.com
+  eap-qe-cluster60.fw.rhcloud.com
+  eap-qe-cluster61.fw.rhcloud.com
+  vmware.devcluster.openshift.com
+```
+
+6) Use your id plus the date, something like `zeus0718`
+
+```
 ? Base Domain devcluster.openshift.com
-
-I always use devcluster.openshift.com
-
-
-
 DEBUG       Fetching "Cluster Name"...
 DEBUG         Fetching "Base Domain"...
 DEBUG         Reusing previously-fetched "Base Domain"
 DEBUG       Generating "Cluster Name"...
-? Cluster Name [? for help] jaboyd0515
+? Cluster Name [? for help]
 
-I always use jaboyd and MMDD.
+7) Paste in the long secret that includes token from `registry.svc.ci.openshift.org`
 
-
-? Cluster Name jaboyd0515
+```
+? Cluster Name zeus0718
 DEBUG       Fetching "Pull Secret"...
 DEBUG       Generating "Pull Secret"...
 ? Pull Secret [? for help]
-
-paste in the long secret that includes token from registry.svc.ci.openshift.org
+```
 
 
 This directory will contain your kubeconfig and and details on how to login to the console log (tail -n 5 .openshift_install.log)
 export KUBECONFIG=/home/jaboyd/deploy/05-06-163240/auth/kubeconfig    where 05-06-163240 is the directory where I extract the install to.
 
 
-Destoring a cluster is similar:
+## Destroying a cluster
 
 come back to the same directory and run `./openshift-install destroy cluster  --log-level debug`
-```
 
 
 ==============
