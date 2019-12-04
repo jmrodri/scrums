@@ -1,4 +1,4 @@
-# Install Service Catalog into OpenShift 4.x
+# Install OpenShift 4.x
 
 ## Download the installer
 
